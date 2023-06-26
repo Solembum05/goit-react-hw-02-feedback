@@ -1,5 +1,5 @@
-import PropTypes from 'prop-types';
-import css from './Feedback.module.css';
+// import PropTypes from 'prop-types';
+// import css from './Feedback.module.css';
 import React from 'react'
 import Statistics from './Statistics';
 import FeedbackOptions from './FeedbackOptions'
