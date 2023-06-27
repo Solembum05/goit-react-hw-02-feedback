@@ -9,9 +9,9 @@ import Notification from './Notification'
 
 class Feedback extends React.Component {
   state = {
-    good: this.props.initialState.good,
-    neutral: this.props.initialState.neutral,
-    bad: this.props.initialState.bad,
+    good: this.props.state.good,
+    neutral: this.props.state.neutral,
+    bad: this.props.state.bad,
   };
 
 
