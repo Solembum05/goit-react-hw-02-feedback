@@ -1,5 +1,4 @@
-// import PropTypes from 'prop-types';
-// import css from './Feedback.module.css';
+import css from './Feedback.module.css';
 import React from 'react'
 import Statistics from './Statistics';
 import FeedbackOptions from './FeedbackOptions'
@@ -40,25 +39,28 @@ class Feedback extends React.Component {
     const positiveFeedback = this.countPositiveFeedbackPercentage().toFixed();
 
     return (
-      <div>
+      <div className={css.container}>
         <Section title="Please leave feedback">
           <FeedbackOptions
             options={Object.keys(this.state)}
             onLeaveFeedback={this.onLeaveFeedback}
           ></FeedbackOptions>
-          { (totalFeedback !==0) ? <Statistics
-            good={this.state.good}
-            neutral={this.state.neutral}
-            bad={this.state.bad}
-            totalFeedback={totalFeedback}
-            positiveFeedback={positiveFeedback}
-          ></Statistics> 
-          :<Notification message="There is no feedback"></Notification>}
-
+          {totalFeedback !== 0 ? (
+            <Statistics
+              good={this.state.good}
+              neutral={this.state.neutral}
+              bad={this.state.bad}
+              totalFeedback={totalFeedback}
+              positiveFeedback={Number(positiveFeedback)}
+            ></Statistics>
+          ) : (
+            <Notification message="There is no feedback"></Notification>
+          )}
         </Section>
       </div>
     );
   }
 }
+
 
 export default Feedback
