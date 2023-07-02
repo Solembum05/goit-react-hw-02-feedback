@@ -1,18 +1,17 @@
 import css from './Feedback.module.css';
 import React from 'react'
-import Statistics from './Statistics';
-import FeedbackOptions from './FeedbackOptions'
-import Section from './Section';
-import Notification from './Notification'
+import Statistics from '../Statistics/Statistics';
+import Section from '../Section/Section';
+import Notification from '../Notification/Notification'
+import FeedbackOptions from 'components/FeedbackOptions/FeedbackOptions';
 
 
 class Feedback extends React.Component {
   state = {
-    good: this.props.state.good,
-    neutral: this.props.state.neutral,
-    bad: this.props.state.bad,
+    good: 0,
+    neutral: 0,
+    bad: 0,
   };
-
 
   onLeaveFeedback = option => {
     this.setState(prevState => {
@@ -26,17 +25,14 @@ class Feedback extends React.Component {
   };
 
   countPositiveFeedbackPercentage = () => {
-    if (this.state.good / !this.countTotalFeedback())
-      return (this.state.good / this.countTotalFeedback()) * 100;
-    else {
-      return 0;
-    }
+
+    return Math.round((this.state.good / this.countTotalFeedback()) * 100) || 0;
+
   };
 
   render() {
-
     const totalFeedback = this.countTotalFeedback();
-    const positiveFeedback = this.countPositiveFeedbackPercentage().toFixed();
+    const positiveFeedback = this.countPositiveFeedbackPercentage()
 
     return (
       <div className={css.container}>
@@ -44,7 +40,7 @@ class Feedback extends React.Component {
           <FeedbackOptions
             options={Object.keys(this.state)}
             onLeaveFeedback={this.onLeaveFeedback}
-          ></FeedbackOptions>
+          />
           {totalFeedback !== 0 ? (
             <Statistics
               good={this.state.good}
@@ -52,9 +48,9 @@ class Feedback extends React.Component {
               bad={this.state.bad}
               totalFeedback={totalFeedback}
               positiveFeedback={Number(positiveFeedback)}
-            ></Statistics>
+            />
           ) : (
-            <Notification message="There is no feedback"></Notification>
+            <Notification message="There is no feedback" />
           )}
         </Section>
       </div>
